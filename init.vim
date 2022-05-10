@@ -1,16 +1,19 @@
 :set number
 :set relativenumber
 
-
 call plug#begin(stdpath('config') . '/plugged')
 
 Plug 'morhetz/gruvbox' " Color scheme
-Plug 'dense-analysis/ale' " Ale: Lint
+Plug 'dense-analysis/ale' " ule: Lint
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Coc: Autocomplete
 Plug 'vim-airline/vim-airline' " Airline: bar below
 Plug 'mbbill/undotree' " Undotree: Undo history
-
 Plug 'nvim-lua/plenary.nvim' " Required by telescope
+
+Plug 'preservim/nerdtree' " File explorer
+Plug 'Xuyuanp/nerdtree-git-plugin' " Show git status
+
+
 Plug 'nvim-telescope/telescope.nvim'  " Search for files
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Highlight text
@@ -27,7 +30,12 @@ call plug#end()
 
 " CONFIGURATION
 
-
+" MY CONFIGURATION COMMANDS
+" Switch between same tab view with ALT
+nmap <silent> <A-k> :wincmd k<CR>
+nmap <silent> <A-j> :wincmd j<CR>
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-l> :wincmd l<CR>
 
 " GRUVBOX]
 let g:gruvbox_contrast_dark='hard'
@@ -47,3 +55,18 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
+
+
+
+
+" NERDTrecopeFuzzyCommandSearch) Configuration
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Telescope bindings
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
