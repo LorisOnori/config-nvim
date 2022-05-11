@@ -1,13 +1,19 @@
-:set number
-:set relativenumber
+set number
+set relativenumber
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set smartindent
+set colorcolumn=80
+set scrolloff=8
+set updatetime=200
 
 call plug#begin(stdpath('config') . '/plugged')
 
 Plug 'morhetz/gruvbox' " Color scheme
-Plug 'dense-analysis/ale' " ule: Lint
+Plug 'dense-analysis/ale' " ale: Lint
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Coc: Autocomplete
-Plug 'vim-airline/vim-airline' " Airline: bar below
 Plug 'mbbill/undotree' " Undotree: Undo history
+
 Plug 'nvim-lua/plenary.nvim' " Required by telescope
 
 Plug 'preservim/nerdtree' " File explorer
@@ -24,6 +30,11 @@ Plug 'kyazdani42/nvim-tree.lua' " File explorer
 
 Plug 'pwntester/octo.nvim' " GitHUB issue and PR
 
+" Lualine
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
+
 call plug#end()
 
 
@@ -32,11 +43,18 @@ call plug#end()
 
 " MY CONFIGURATION COMMANDS
 " Switch between same tab view with ALT
-nmap <silent> <A-k> :wincmd k<CR>
-nmap <silent> <A-j> :wincmd j<CR>
-nmap <silent> <A-h> :wincmd h<CR>
-nmap <silent> <A-l> :wincmd l<CR>
-
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 " GRUVBOX]
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
@@ -67,6 +85,16 @@ nnoremap <C-f> :NERDTreeFind<CR>
 
 " Telescope bindings
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" For find_files and live_grep is needed a sudo apt stuff
+" sudo apt install fd-find
+" Download ripgrep
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+" Lualine Configuration
+lua << END
+require('lualine').setup()
+END
