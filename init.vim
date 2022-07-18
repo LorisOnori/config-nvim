@@ -7,6 +7,11 @@ set colorcolumn=80
 set scrolloff=8
 set updatetime=200
 
+let g:ale_linters={
+			\'python': ['flake8'],
+			\}
+let g:ale_disable_lsp = 1
+
 call plug#begin(stdpath('config') . '/plugged')
 
 Plug 'morhetz/gruvbox' " Color scheme
@@ -39,6 +44,11 @@ Plug 'sindrets/diffview.nvim'
 
 " latex
 Plug 'lervag/vimtex'
+
+"Lint
+Plug 'vim-syntastic/syntastic'
+
+Plug 'lukas-reineke/indent-blankline.nvim' " Intent line
 
 call plug#end()
 
