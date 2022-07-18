@@ -34,6 +34,11 @@ Plug 'pwntester/octo.nvim' " GitHUB issue and PR
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
+" Git Diff
+Plug 'sindrets/diffview.nvim'
+
+" latex
+Plug 'lervag/vimtex'
 
 call plug#end()
 
